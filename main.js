@@ -3,6 +3,7 @@ var dodger = {
 		// Charger les fichiers
 		game.load.image('fond', 'assets/fond.jpg');
 		game.load.image('player', 'assets/electru.jpg')
+		game.load.image('enemi', 'assets/forbiden.png')
 	},
 	create: function() {
 		
@@ -14,8 +15,14 @@ var dodger = {
 		game.physics.arcade.enable(this.player);
 
 		this.cursors = game.input.keyboard.createCursorKeys();
+
+		this.enemis = game.add.group();
+
+		this.timer = game.time.events.loop(200, this.addEnemi, this);
 	},
 	update: function() {
+		this.player.body.velocity.x = 0;
+		this.player.body.velocity.y = 0;
 		if(this.cursors.left.isDown){
 			this.player.body.velocity.x = -300;
 		}
@@ -28,7 +35,24 @@ var dodger = {
 		if(this.cursors.down.isDown){
 			this.player.body.velocity.y = 300;
 		}
+		if(this.player.inWorld == false){
+			this.restartGame();
+		}
+
+
 		
+	},
+	restartGame: function(){
+		game.state.start('dodger')
+	},
+	addEnemi: function(){
+		var enemi = game.add.sprite(300, 100, 'enemi');
+		game.physics.arcade.enable(enemi);
+
+		enemi.body.gravity.y = 200;
+		this.enemis.add(enemi);
+		enemi.checkWorldBounds = true;
+		enemi.outOfBoundsKill = true;
 	}
 };
 
