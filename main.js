@@ -21,19 +21,20 @@ var dodger = {
 		this.timer = game.time.events.loop(200, this.addEnemi, this);
 	},
 	update: function() {
+		game.physics.arcade.overlap(this.player, this.enemis, this.restartGame, null, this);
 		this.player.body.velocity.x = 0;
 		this.player.body.velocity.y = 0;
 		if(this.cursors.left.isDown){
-			this.player.body.velocity.x = -300;
+			this.player.body.velocity.x = -600;
 		}
 		if(this.cursors.right.isDown){
-			this.player.body.velocity.x = 300;
+			this.player.body.velocity.x = 600;
 		}
 		if(this.cursors.up.isDown){
-			this.player.body.velocity.y = -300;
+			this.player.body.velocity.y = -600;
 		}
 		if(this.cursors.down.isDown){
-			this.player.body.velocity.y = 300;
+			this.player.body.velocity.y = 600;
 		}
 		if(this.player.inWorld == false){
 			this.restartGame();
@@ -46,7 +47,8 @@ var dodger = {
 		game.state.start('dodger')
 	},
 	addEnemi: function(){
-		var enemi = game.add.sprite(300, 100, 'enemi');
+		var randpos = Math.floor(Math.random()* 1400) + 1; 
+		var enemi = game.add.sprite(randpos, -50, 'enemi');
 		game.physics.arcade.enable(enemi);
 
 		enemi.body.gravity.y = 200;
