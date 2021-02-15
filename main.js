@@ -19,6 +19,15 @@ var dodger = {
 		if(this.cursors.left.isDown){
 			this.player.body.velocity.x = -300;
 		}
+		if(this.cursors.right.isDown){
+			this.player.body.velocity.x = 300;
+		}
+		if(this.cursors.up.isDown){
+			this.player.body.velocity.y = -300;
+		}
+		if(this.cursors.down.isDown){
+			this.player.body.velocity.y = 300;
+		}
 		
 	}
 };
