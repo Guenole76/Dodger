@@ -16,7 +16,7 @@ var dodger = {
 		
 		game.physics.startSystem(Phaser.Physics.ARCADE);
 		game.sound.mute = false;
-		game.add.sprite(0, 0, 'fond');
+		game.add.sprite(0, 0, 'fond');//ajout de l'image de fond
 		this.player =  game.add.sprite(600, 800, 'player');//ajoute l'image 'player' a la coordonner donnée
 
 		game.physics.arcade.enable(this.player);//l'image 'player' est affecter par la psysics
@@ -27,9 +27,9 @@ var dodger = {
 
 		this.timer = game.time.events.loop(200, this.addEnemi, this);// ajoute un enemi a chaque intervale de temps
 
-		this.score = 0;
-		this.bestScore = 0;
-		this.labelScore = game.add.text(20, 20, "score: 0", {font: "30px Arial", fill: "#ffff"} );
+		this.score = 0;//variable score qu'il faudra incrementer
+		
+		this.labelScore = game.add.text(20, 20, "score: 0", {font: "30px Arial", fill: "#ffff"} );// ajout d'un text a un position et style
 		
 
 		const width = this.scale.width;
@@ -68,7 +68,7 @@ var dodger = {
 		}
 		if(this.player.inWorld == false){//si l'image du joueur est hors du "plateau" on lance la function gameOver
 
-			this.gameOver();
+			this.gameOver();//appele de la function gameOver
 			
 
 		
@@ -105,17 +105,17 @@ var dodger = {
 		play = false;
 		if(x === false){
 			this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-			game.add.sprite(0, 0, 'gameover');
-			game.cache.removeSound('musicjeu');
+			game.add.sprite(0, 0, 'gameover');//ajout de limage gameover
+			game.cache.removeSound('musicjeu');//on retire la music du jeu
 			
 
 			
-			this.labelRestart = game.add.text(800, 900, "Appuyez sur 'Espace' pour rejouer", {font: "30px Arial", fill: "#ffff"} );
-			this.labelScore = game.add.text(20, 20, "score: 0", {font: "30px Arial", fill: "#ffff"} );
-			this.labelScore.text = "score:" + this.score;
+			this.labelRestart = game.add.text(800, 900, "Appuyez sur 'Espace' pour rejouer", {font: "30px Arial", fill: "#ffff"} );//text appuyez sur rejouer
+			this.labelScore = game.add.text(20, 20, "score: 0", {font: "30px Arial", fill: "#ffff"} );//text score
+			this.labelScore.text = "score:" + this.score;// affichage du score
 			
 			
-			if(this.spaceKey.isDown){
+			if(this.spaceKey.isDown){// si on appuye sur espace sa relance le jeu
 				
 				this.restartGame();
 			}
@@ -125,7 +125,7 @@ var dodger = {
 
 };
 
-var game = new Phaser.Game(1400, 1000, Phaser.AUTO, 'gameDiv');
+var game = new Phaser.Game(1400, 1000, Phaser.AUTO, 'gameDiv');// le jeu est en 1400px sur 1000px
 
 game.state.add('dodger',dodger);
 game.state.start('dodger');
